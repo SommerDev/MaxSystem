@@ -97,7 +97,7 @@ public class UsuarioServlet extends HttpServlet {
 				DateTimeFormatter formattime = DateTimeFormatter.ofPattern("HH:mm");
 		String nome = request.getParameter("nome");
 		Date dia = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("dia"));
-		Date hora = new SimpleDateFormat("HH:mm").parse(request.getParameter("hora"));
+		Time hora = (Time) new SimpleDateFormat("HH:mm").parse(request.getParameter("hora"));
 		Usuario adicaoUsuario = new Usuario(nome, dia, hora);
 		usuarioDAO.inserirUsuario(adicaoUsuario);
 		response.sendRedirect("listagem");
@@ -107,8 +107,8 @@ public class UsuarioServlet extends HttpServlet {
 			throws SQLException, IOException {
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
 		String nome = request.getParameter("nome");
-		Date dia = request.getParameter("dia");
-		Time hora = request.getParameter("hora");
+		Date dia = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("dia"));
+		Time hora = (Time) new SimpleDateFormat("HH:mm").parse(request.getParameter("hora"));
 		Usuario atualizacaoUsuario = new Usuario(codigo, nome, dia, hora);
 		usuarioDAO.atualizarUsuario(atualizacaoUsuario);
 		response.sendRedirect("listagem");
