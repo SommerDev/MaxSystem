@@ -3,6 +3,7 @@ package modelo;
 import java.sql.Date;
 import java.sql.Time;
 
+
 /**
  * Esta classe modelo (JavaBean) representa uma entidade de usuário.
  *
@@ -15,8 +16,7 @@ public class Usuario {
 	protected Time hora;
 
 
-
-	public Usuario(String nome, Date dia, Time hora) {
+/*	public Usuario(String nome, Date dia, Time hora) {
 		super();
 		this.nome = nome;
 		this.dia = dia;
@@ -28,6 +28,21 @@ public class Usuario {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.dia = dia;
+		this.hora = hora;
+	}   */
+
+	public Usuario(String nome, java.util.Date dia, Time hora) {
+		super();
+		this.nome = nome;
+		this.dia = (Date) dia;
+		this.hora = hora;
+	}
+
+	public Usuario(int codigo, String nome, java.util.Date dia, Time hora) {
+		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.dia = (Date) dia;
 		this.hora = hora;
 	}
 

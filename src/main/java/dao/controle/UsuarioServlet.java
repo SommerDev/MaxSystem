@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -66,6 +67,9 @@ public class UsuarioServlet extends HttpServlet {
 			}
 		} catch (SQLException erro) {
 			throw new ServletException(erro);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -93,22 +97,22 @@ public class UsuarioServlet extends HttpServlet {
 	}
 
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ParseException {
 				DateTimeFormatter formattime = DateTimeFormatter.ofPattern("HH:mm");
 		String nome = request.getParameter("nome");
-		Date dia = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("dia"));
-		Time hora = (Time) new SimpleDateFormat("HH:mm").parse(request.getParameter("hora"));
+		Date dia = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("dia"));
+		Time hora = (Time) new SimpleDateFormat("hh:mm").parse(request.getParameter("hora"));
 		Usuario adicaoUsuario = new Usuario(nome, dia, hora);
 		usuarioDAO.inserirUsuario(adicaoUsuario);
 		response.sendRedirect("listagem");
 	}
 
 	private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ParseException {
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
 		String nome = request.getParameter("nome");
-		Date dia = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("dia"));
-		Time hora = (Time) new SimpleDateFormat("HH:mm").parse(request.getParameter("hora"));
+		Date dia = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("dia"));
+		Time hora = (Time) new SimpleDateFormat("hh:mm").parse(request.getParameter("hora"));
 		Usuario atualizacaoUsuario = new Usuario(codigo, nome, dia, hora);
 		usuarioDAO.atualizarUsuario(atualizacaoUsuario);
 		response.sendRedirect("listagem");
