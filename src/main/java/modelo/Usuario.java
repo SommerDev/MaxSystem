@@ -35,7 +35,7 @@ public class Usuario {
 		super();
 		this.nome = nome;
 		this.dia = (Date) dia;
-		this.hora = hora;
+		this.hora = (Time) hora;
 	}
 
 	public Usuario(int codigo, String nome, java.util.Date dia, Time hora) {
@@ -43,7 +43,7 @@ public class Usuario {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.dia = (Date) dia;
-		this.hora = hora;
+		this.hora = (Time) hora;
 	}
 
 	public int getCodigo() {
