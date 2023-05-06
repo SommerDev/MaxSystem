@@ -3,13 +3,16 @@ package dao.controle;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -60,8 +63,8 @@ public class UsuarioServlet extends HttpServlet {
 				exibirFormularioEdicao(request, response);
 				break;
 			case "/atualizar":
-				atualizarUsuario(request, response);
-				break;
+			atualizarUsuario(request, response);
+			break;
 			default:
 				listarUsuario(request, response);
 				break;
@@ -101,13 +104,28 @@ public class UsuarioServlet extends HttpServlet {
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ParseException {
 				DateTimeFormatter formattime = DateTimeFormatter.ofPattern("HH:mm");
-		String nome = request.getParameter("nome");
-		Date dia = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("dia"));
+			String nome = request.getParameter("nome");
+			String hora = request.getParameter("hora");
+			String diaTemp =request.getParameter("dia");
+			SimpleDateFormat dia = new SimpleDateFormat("yyyy-MM-dd");
+			
+//			Date dia = new SimpleDateFormat("yyyy/MM/dd").parse(diaTemp);
+//			String dataEmTexto = request.getParameter("dia");
+//			Date date = new SimpleDateFormat("yyyy/MM/dd").parse(dataEmTexto);
+//			String diaTemp =request.getParameter("dia");  
+//		    Date dia = new SimpleDateFormat("yyyy/MM/dd").parse(diaTemp);
+
+//		Date dia = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("dia"));
 //		Time hora = new Time(SimpleDateFormat("hh:mm").parse(request.getParameter("hora")));
-    	Time hora = (Time) new SimpleDateFormat("hh:mm").parse(request.getParameter("hora"));
-		Usuario adicaoUsuario = new Usuario(nome, dia, hora);
-		usuarioDAO.inserirUsuario(adicaoUsuario);
+//    	Time hora = (Time) new SimpleDateFormat("hh:mm").parse(request.getParameter("hora"));
+//		Usuario adicaoUsuario = new Usuario(nome, dia, hora);
+//		usuarioDAO.inserirUsuario(adicaoUsuario);
 		response.sendRedirect("listagem");
+	}
+
+private String SimpleDateFormat(Date date) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 /*	private Date SimpleDateFormat(String string) {
@@ -118,10 +136,12 @@ public class UsuarioServlet extends HttpServlet {
 	private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ParseException {
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
+		DateTimeFormatter formattime = DateTimeFormatter.ofPattern("HH:mm");
 		String nome = request.getParameter("nome");
-		Date dia = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("dia"));
-//		Time hora = new Time(SimpleDateFormat("hh:mm").parse(request.getParameter("hora")));
-		Time hora = (Time) new SimpleDateFormat("hh:mm").parse(request.getParameter("hora"));
+		String hora = request.getParameter("hora");
+		String diaTemp =request.getParameter("dia");  
+	    Date dia = new SimpleDateFormat("yyyy-MM-dd").parse(diaTemp);
+
 		Usuario atualizacaoUsuario = new Usuario(codigo, nome, dia, hora);
 		usuarioDAO.atualizarUsuario(atualizacaoUsuario);
 		response.sendRedirect("listagem");
