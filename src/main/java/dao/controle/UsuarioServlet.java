@@ -3,13 +3,16 @@ package dao.controle;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -60,8 +63,8 @@ public class UsuarioServlet extends HttpServlet {
 				exibirFormularioEdicao(request, response);
 				break;
 			case "/atualizar":
-				atualizarUsuario(request, response);
-				break;
+			atualizarUsuario(request, response);
+			break;
 			default:
 				listarUsuario(request, response);
 				break;
@@ -100,28 +103,21 @@ public class UsuarioServlet extends HttpServlet {
 	@SuppressWarnings("deprecation")
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ParseException {
-				DateTimeFormatter formattime = DateTimeFormatter.ofPattern("HH:mm");
-		String nome = request.getParameter("nome");
-		Date dia = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("dia"));
-//		Time hora = new Time(SimpleDateFormat("hh:mm").parse(request.getParameter("hora")));
-    	Time hora = (Time) new SimpleDateFormat("hh:mm").parse(request.getParameter("hora"));
+			String nome = request.getParameter("nome");
+			String dia = request.getParameter("dia");
+			String hora = request.getParameter("hora");
 		Usuario adicaoUsuario = new Usuario(nome, dia, hora);
 		usuarioDAO.inserirUsuario(adicaoUsuario);
 		response.sendRedirect("listagem");
 	}
 
-/*	private Date SimpleDateFormat(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	} */
-
-	private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
+		private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ParseException {
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
 		String nome = request.getParameter("nome");
-		Date dia = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("dia"));
-//		Time hora = new Time(SimpleDateFormat("hh:mm").parse(request.getParameter("hora")));
-		Time hora = (Time) new SimpleDateFormat("hh:mm").parse(request.getParameter("hora"));
+		String dia = request.getParameter("dia");
+		String hora = request.getParameter("hora");
+
 		Usuario atualizacaoUsuario = new Usuario(codigo, nome, dia, hora);
 		usuarioDAO.atualizarUsuario(atualizacaoUsuario);
 		response.sendRedirect("listagem");

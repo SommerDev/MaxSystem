@@ -54,12 +54,12 @@
                                                   name="nome" required="required">
 				</fieldset>
 				<fieldset class="form-group">
-					<label>Dia</label> <input type="date"
+					<label>Dia</label> <input type="text"
                                                  value="<c:out value='${usuario.dia}' />" class="form-control"
                                                  name="dia" required="required">
 				</fieldset>
 				<fieldset class="form-group">
-					<label>hora</label> <input type="time"
+					<label>hora</label> <input type="text"
                                                value="<c:out value='${usuario.hora}' />" class="form-control"
                                                name="hora" required="required">
 				</fieldset>

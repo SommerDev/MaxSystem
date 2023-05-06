@@ -57,14 +57,15 @@ public class UsuarioDAO {
 			// O codigo do usuário é omitido do comando, pois foi definido na tabela como
 			// autoincremento
 			executarComando.setString(1, usuario.getNome());
-			executarComando.setDate(2, usuario.getDia());
-			executarComando.setTime(3, usuario.getHora());
+			executarComando.setString(2, usuario.getDia());
+			executarComando.setString(3, usuario.getHora());
 			System.out.println(executarComando);
 			executarComando.executeUpdate();
-		} catch (SQLException erro) {
+		} catch (SQLException erro) {	
 			printSQLException(erro);
 		}
 	}
+
 
 	public Usuario selecionarUsuario(int codigo) {
 		Usuario usuario = null;
@@ -79,8 +80,8 @@ public class UsuarioDAO {
 			// Etapa 4: processa o objeto ResultSet
 			while (resultado.next()) {
 				String nome = resultado.getString("nome");
-				Date dia = resultado.getDate("dia");
-				Time hora = resultado.getTime("hora");
+				String dia = resultado.getString("dia");
+				String hora = resultado.getString("hora");
 				usuario = new Usuario(codigo, nome, dia, hora);
 			}
 		} catch (SQLException erro) {
@@ -103,8 +104,8 @@ public class UsuarioDAO {
 			while (resultado.next()) {
 				int codigo = resultado.getInt("codigo");
 				String nome = resultado.getString("nome");
-				Date dia = resultado.getDate("dia");
-				Time hora = resultado.getTime("hora");
+				String dia = resultado.getString("dia");
+				String hora = resultado.getString("hora");
 				usuarios.add(new Usuario(codigo, nome, dia, hora));
 			}
 		} catch (SQLException erro) {
@@ -129,8 +130,8 @@ public class UsuarioDAO {
 		try (Connection connection = getConnection();
 				PreparedStatement executarComando = connection.prepareStatement(ATUALIZAR_USUARIO);) {
 			executarComando.setString(1, usuario.getNome());
-			executarComando.setDate(2, usuario.getDia());
-			executarComando.setTime(3, usuario.getHora());
+			executarComando.setString(2, usuario.getDia());
+			executarComando.setString(3, usuario.getHora());
 			executarComando.setInt(4, usuario.getCodigo());
 			registroAtualizado = executarComando.executeUpdate() > 0;
 		}

@@ -12,8 +12,8 @@ import java.sql.Time;
 public class Usuario {
 	protected int codigo;
 	protected String nome;
-	protected Date dia;
-	protected Time hora;
+	protected String dia;
+	protected String hora;
 
 
 /*	public Usuario(String nome, Date dia, Time hora) {
@@ -31,19 +31,19 @@ public class Usuario {
 		this.hora = hora;
 	}   */
 
-	public Usuario(String nome, java.util.Date dia, Time hora) {
+	public Usuario(String nome, String dia, String hora) {
 		super();
 		this.nome = nome;
-		this.dia = (Date) dia;
-		this.hora = (Time) hora;
+		this.dia = dia;
+		this.hora = hora;
 	}
 
-	public Usuario(int codigo, String nome, java.util.Date dia, Time hora) {
+	public Usuario(int codigo, String nome, String dia, String hora) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
-		this.dia = (Date) dia;
-		this.hora = (Time) hora;
+		this.dia = dia;
+		this.hora = hora;
 	}
 
 	public int getCodigo() {
@@ -62,19 +62,19 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public Date getDia() {
+	public String getDia() {
 		return dia;
 	}
 
-	public void setDia(Date dia) {
+	public void setDia(String dia) {
 		this.dia = dia;
 	}
 
-	public Time getHora() {
+	public String getHora() {
 		return hora;
 	}
 
-	public void setHora(Time hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
 	}
 }
