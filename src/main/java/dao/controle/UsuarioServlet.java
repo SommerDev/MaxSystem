@@ -106,8 +106,11 @@ public class UsuarioServlet extends HttpServlet {
 				DateTimeFormatter formattime = DateTimeFormatter.ofPattern("HH:mm");
 			String nome = request.getParameter("nome");
 			String hora = request.getParameter("hora");
-			String diaTemp =request.getParameter("dia");
-			SimpleDateFormat dia = new SimpleDateFormat("yyyy-MM-dd");
+			String dataInicial = request.getParameter("dia");
+			SimpleDateFormat varTemp = new SimpleDateFormat("yyyy-MM-dd");
+			Date dia = varTemp.parse(dataInicial);
+//			String diaTemp =request.getParameter("dia");
+//			Date dia = new SimpleDateFormat ("yyyy-MM-dd").parse(diaTemp);
 			
 //			Date dia = new SimpleDateFormat("yyyy/MM/dd").parse(diaTemp);
 //			String dataEmTexto = request.getParameter("dia");
@@ -118,28 +121,18 @@ public class UsuarioServlet extends HttpServlet {
 //		Date dia = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("dia"));
 //		Time hora = new Time(SimpleDateFormat("hh:mm").parse(request.getParameter("hora")));
 //    	Time hora = (Time) new SimpleDateFormat("hh:mm").parse(request.getParameter("hora"));
-//		Usuario adicaoUsuario = new Usuario(nome, dia, hora);
-//		usuarioDAO.inserirUsuario(adicaoUsuario);
+		Usuario adicaoUsuario = new Usuario(nome, dia, hora);
+		usuarioDAO.inserirUsuario(adicaoUsuario);
 		response.sendRedirect("listagem");
 	}
 
-private String SimpleDateFormat(Date date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-/*	private Date SimpleDateFormat(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	} */
-
-	private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
+		private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ParseException {
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
 		DateTimeFormatter formattime = DateTimeFormatter.ofPattern("HH:mm");
 		String nome = request.getParameter("nome");
 		String hora = request.getParameter("hora");
-		String diaTemp =request.getParameter("dia");  
+		String diaTemp =request.getParameter("dia");
 	    Date dia = new SimpleDateFormat("yyyy-MM-dd").parse(diaTemp);
 
 		Usuario atualizacaoUsuario = new Usuario(codigo, nome, dia, hora);

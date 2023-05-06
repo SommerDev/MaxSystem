@@ -57,13 +57,18 @@ public class UsuarioDAO {
 			// O codigo do usuário é omitido do comando, pois foi definido na tabela como
 			// autoincremento
 			executarComando.setString(1, usuario.getNome());
-			executarComando.setDate(2, usuario.getDia());
-			executarComando.setTime(3, usuario.getHora());
+			executarComando.setDate(2, new java.sql.Date(getDia().getTime()));
+			executarComando.setString(3, usuario.getHora());
 			System.out.println(executarComando);
 			executarComando.executeUpdate();
 		} catch (SQLException erro) {
 			printSQLException(erro);
 		}
+	}
+
+	private java.util.Date getDia() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public Usuario selecionarUsuario(int codigo) {
@@ -80,7 +85,7 @@ public class UsuarioDAO {
 			while (resultado.next()) {
 				String nome = resultado.getString("nome");
 				Date dia = resultado.getDate("dia");
-				Time hora = resultado.getTime("hora");
+				String hora = resultado.getString("hora");
 				usuario = new Usuario(codigo, nome, dia, hora);
 			}
 		} catch (SQLException erro) {
@@ -104,7 +109,7 @@ public class UsuarioDAO {
 				int codigo = resultado.getInt("codigo");
 				String nome = resultado.getString("nome");
 				Date dia = resultado.getDate("dia");
-				Time hora = resultado.getTime("hora");
+				String hora = resultado.getString("hora");
 				usuarios.add(new Usuario(codigo, nome, dia, hora));
 			}
 		} catch (SQLException erro) {
@@ -130,7 +135,7 @@ public class UsuarioDAO {
 				PreparedStatement executarComando = connection.prepareStatement(ATUALIZAR_USUARIO);) {
 			executarComando.setString(1, usuario.getNome());
 			executarComando.setDate(2, usuario.getDia());
-			executarComando.setTime(3, usuario.getHora());
+			executarComando.setString(3, usuario.getHora());
 			executarComando.setInt(4, usuario.getCodigo());
 			registroAtualizado = executarComando.executeUpdate() > 0;
 		}

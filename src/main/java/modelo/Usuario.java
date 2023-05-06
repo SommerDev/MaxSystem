@@ -13,7 +13,7 @@ public class Usuario {
 	protected int codigo;
 	protected String nome;
 	protected Date dia;
-	protected Time hora;
+	protected String hora;
 
 
 /*	public Usuario(String nome, Date dia, Time hora) {
@@ -31,19 +31,19 @@ public class Usuario {
 		this.hora = hora;
 	}   */
 
-	public Usuario(String nome, java.util.Date dia, Time hora) {
+	public Usuario(String nome, java.util.Date dia, String hora) {
 		super();
 		this.nome = nome;
 		this.dia = (Date) dia;
-		this.hora = (Time) hora;
+		this.hora = hora;
 	}
 
-	public Usuario(int codigo, String nome, java.util.Date dia, Time hora) {
+	public Usuario(int codigo, String nome, java.util.Date dia, String hora) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 		this.dia = (Date) dia;
-		this.hora = (Time) hora;
+		this.hora = hora;
 	}
 
 	public int getCodigo() {
@@ -70,11 +70,11 @@ public class Usuario {
 		this.dia = dia;
 	}
 
-	public Time getHora() {
+	public String getHora() {
 		return hora;
 	}
 
-	public void setHora(Time hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
 	}
 }
